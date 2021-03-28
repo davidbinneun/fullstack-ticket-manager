@@ -34,15 +34,17 @@ function App() {
   };
 
   return (
-    <div>
+    <div id="main">
+      <h1>// Ticket Manager</h1>
       <div className="search">
         <input autoComplete="off" id="searchInput" type="text" placeholder="Search" onChange={handleSearchChange} />
       </div>
 
       <div id="overview">
-        <span>Showing {tickets.length - hiddenTickets} results </span>
-        {hiddenTickets !== 0 && <span>(<span id="hideTicketsCounter">{hiddenTickets}</span> hidden ticket{hiddenTickets > 1 ? 's': ''} - 
-        <button id="restoreHideTickets" onClick={() => setHiddenTickets(0)}>Restore</button>)</span> }
+        <div>Showing {tickets.length - hiddenTickets} results </div>
+        {hiddenTickets !== 0 && 
+        <div><span id="hideTicketsCounter">{hiddenTickets}</span> <span>hidden ticket{hiddenTickets > 1 ? 's': ''} </span>  
+        <button id="restoreHideTickets" onClick={() => setHiddenTickets(0)}>// Restore</button></div> }
       </div>
 
       <div className="tickets">
