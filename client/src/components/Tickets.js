@@ -19,6 +19,7 @@ export default class PersonList extends React.Component {
     return (
       <div className="tickets">
         { this.state.tickets.map(ticket => <Ticket key={ticket._id} ticket={ticket} />)}
+        <div id="spinner" className="show"></div> 
       </div>
     )
   }

@@ -44,3 +44,17 @@ app.get("/api/tickets", async (req, res) => {
   let tickets = await Ticket.find({});
   res.send(tickets).status(200);
 });
+
+app.patch("/api/tickets/:ticketId/done", async (req, res) => {
+  await Ticket.findOneAndUpdate({_id: req.params.ticketId}, {done: true}, {
+    returnOriginal: false
+  }); 
+  res.send({updated: true}).status(200);
+});
+
+app.patch("/api/tickets/:ticketId/undone", async (req, res) => {
+  await Ticket.findOneAndUpdate({_id: req.params.ticketId}, {done: false}, {
+    returnOriginal: false
+  }); 
+  res.send({updated: true}).status(200);
+});

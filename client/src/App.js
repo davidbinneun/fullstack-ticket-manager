@@ -6,10 +6,16 @@ import "./App.css";
 function App() {
   let cancelToken;
   const [tickets, setTickets] = React.useState([]);
+  const [spinner, showSpinner] = React.useState(true);
+  const [hiddenTickets, setHiddenTickets] = React.useState(0);
 
   React.useEffect( () => {
-    axios.get(`/api/tickets`).then(res => {setTickets(res.data)})
+    axios.get(`/api/tickets`).then(res => {setTickets(res.data); showSpinner(false);})
   }, []);
+
+  function addHidden(){
+    setHiddenTickets(hiddenTickets + 1);
+  }
 
   const handleSearchChange = async (e) => {
     const searchTerm = e.target.value;
@@ -20,8 +26,8 @@ function App() {
     cancelToken = axios.CancelToken.source();
 
     try {
-      const results = await axios.get(`/api/tickets?searchText=${searchTerm}`,{ cancelToken: cancelToken.token });
-      setTickets(results.data);
+      let res = await axios.get(`/api/tickets?searchText=${searchTerm}`,{ cancelToken: cancelToken.token });
+      setTickets(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -29,21 +35,22 @@ function App() {
 
   return (
     <div>
-      <input id="searchInput" type="text" placeholder="Search" onChange={handleSearchChange} />
-      <div className="tickets">
-        { tickets.map(ticket => <Ticket key={ticket._id} ticket={ticket} />)}
+      <div className="search">
+        <input autoComplete="off" id="searchInput" type="text" placeholder="Search" onChange={handleSearchChange} />
       </div>
+
+      <div id="overview">
+        <span>Showing {tickets.length - hiddenTickets} results </span>
+        {hiddenTickets !== 0 && <span>(<span id="hideTicketsCounter">{hiddenTickets}</span> hidden ticket{hiddenTickets > 1 ? 's': ''} - 
+        <button id="restoreHideTickets" onClick={() => setHiddenTickets(0)}>Restore</button>)</span> }
+      </div>
+
+      <div className="tickets">
+        { tickets.map(ticket => <Ticket key={ticket._id} ticket={ticket} addHidden={addHidden} hiddenTickets={hiddenTickets} />)}
+      </div>
+      {spinner && <div id="spinner"></div>}
     </div>
   );
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Search />
-//       <Tickets />
-//     </div>
-//   );
-// }
 
 export default App;
