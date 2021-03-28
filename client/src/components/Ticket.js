@@ -1,6 +1,6 @@
 import Done from "./Done.js";
 import React, { useState } from 'react';
-
+// nothing
 export default function Ticket(props) {
   const [show, setShow] = useState(true);
   if (!show && props.hiddenTickets !== 0) return null;
