@@ -26,12 +26,8 @@ h2 {
   margin-left: 10px;
 }
 
-.tickets {
-
-}
-
 .ticket {
-  margin-top: 30px;
+  margin-top: 50px;
   border-left: 5px solid #2b2d35;
 }
 
@@ -57,7 +53,7 @@ h2 {
 
 #overview {
   margin-top: 10px;
-  padding: 0px 10px 20px 10px;
+  padding: 0px 10px 0px 10px;
   display: flex;
   justify-content: space-between;
 }
@@ -74,10 +70,14 @@ h2 {
   cursor: pointer;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .interact {
   display: flex;
   justify-content: space-between;
-  font-size: 24px;
   margin-left: 10px;
 }
 
@@ -87,6 +87,8 @@ h2 {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-transform: uppercase;
   text-align: center;
+  font-size: 24px;
+  margin-right: 10px;
 }
 
 .doneButton:hover {
@@ -108,6 +110,7 @@ h2 {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-transform: uppercase;
   text-align: center;
+  margin-right: 10px;
 }
 
 .hideTicketButton:hover {

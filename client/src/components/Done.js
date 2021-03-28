@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Done(props) {
   const [done, setState] = useState(props.done);
