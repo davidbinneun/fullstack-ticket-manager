@@ -1,14 +1,22 @@
 import Done from "./Done.js";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // nothing
 export default function Ticket(props) {
   const [show, setShow] = useState(true);
-  if (!show && props.hiddenTickets !== 0) return null;
+
+  useEffect(() => {
+    if (props.hiddenTickets === 0) setShow(true);
+  }, [props.hiddenTickets]);
+
+  if (!show) return null;
+
+
 
   function handleClick() {
     setShow(false);
     props.addHidden();
   }
+
 
   return (
     <div className="ticket">

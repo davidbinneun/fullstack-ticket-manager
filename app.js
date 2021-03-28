@@ -13,13 +13,15 @@ const ticketSchema = new mongoose.Schema({
   });
   ticketSchema.index({title: 'text'});
   const Ticket = mongoose.model('Ticket', ticketSchema);
+
+  app.get("/", (req, res) => {
+    res.sendFile('index.html');
+  });
   
   app.get("/api/tickets", async (req, res) => {
     let { searchText } = req.query;
-    console.log("app.get api/tickets", searchText);
   
     if (searchText){
-      console.log("if searchtext", searchText);
       let tickets = await Ticket.find( { title: { $regex: searchText, $options: "i" } } );
       return res.json(tickets).status(200);
     }
