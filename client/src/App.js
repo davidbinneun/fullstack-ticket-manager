@@ -41,7 +41,7 @@ function App() {
       </div>
 
       <div id="overview">
-        <div>Showing {tickets.length - hiddenTickets} results </div>
+        {tickets.length === 0 ? <div>No results</div> : <div>Showing {tickets.length - hiddenTickets} results </div>}
         {hiddenTickets !== 0 && 
         <div><span id="hideTicketsCounter">{hiddenTickets}</span> <span>hidden ticket{hiddenTickets > 1 ? 's': ''} </span>  
         <button id="restoreHideTickets" onClick={() => setHiddenTickets(0)}>/Restore</button></div> }
